@@ -6,6 +6,7 @@ public class MainManagerScript : MonoBehaviour
 {
     private static SceneManagerScript sceneManager;
     private static ActionManagerScript actionManager;
+    private static MessageManager messageManager;
 
     public static SceneManagerScript SceneManager {
         get
@@ -27,6 +28,22 @@ public class MainManagerScript : MonoBehaviour
         private set 
         { 
             actionManager = value; 
+        }
+    }
+
+    public static MessageManager MessageManager
+    {
+        get
+        {
+            if (messageManager == null)
+            {
+                messageManager = FindObjectOfType<MessageManager>();
+            }
+            return messageManager;
+        }
+        private set 
+        {
+            messageManager = value;
         }
     }
 

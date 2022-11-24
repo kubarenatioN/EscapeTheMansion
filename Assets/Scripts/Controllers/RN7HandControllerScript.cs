@@ -36,6 +36,7 @@ public class RN7HandControllerScript : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         playerIK.StopIK();
+        objCustomData.ToggleActionLabel(false);
         objToInteract = null;
         objCustomData = null;
     }
@@ -53,6 +54,14 @@ public class RN7HandControllerScript : MonoBehaviour
         if (objToInteract != null && objCustomData != null)
         {
             objCustomData.ToggleActionLabel(true);
+
+            if (Input.GetKey(KeyCode.E))
+            {
+                TakeItem(objToInteract.gameObject);
+                playerIK.StopIK();
+                MainManagerScript.MessageManager.WriteMessage("Вы подобрали " + objCustomData.Name);
+                Dispose();
+            }
         }
     }
 
@@ -62,5 +71,17 @@ public class RN7HandControllerScript : MonoBehaviour
         {
             objCustomData.ToggleActionLabel(false);
         }
+    }
+
+    private void TakeItem(GameObject item)
+    {
+        item.SetActive(false);
+    }
+
+    private void Dispose()
+    {
+        objCustomData.ToggleActionLabel(false);
+        objToInteract = null;
+        objCustomData = null;
     }
 }
